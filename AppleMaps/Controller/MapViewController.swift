@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MapViewController.swift
 //  AppleMaps
 //
 //  Created by Mustafa on 7/2/20.
@@ -9,8 +9,10 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class MapViewController: UIViewController {
 
+	// MARK:- Outlets and Properties
+	
 	@IBOutlet weak var mapView: MKMapView! {
 		didSet { mapView.delegate = self }
 	}
@@ -18,26 +20,31 @@ class ViewController: UIViewController {
 	private let locationManager = CLLocationManager()
 	private let regionInMeters = Double(10000)
 	
+	// MARK:- View Lifecycle
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		mapView.delegate = self
+		
 		checkLocationServices()
 	}
 
-
 }
 
-extension ViewController: MKMapViewDelegate {
+// MARK:- MapView Delegate
+
+extension MapViewController: MKMapViewDelegate {
+	
 	
 }
 
-extension ViewController: CLLocationManagerDelegate {
+// MARK:- LocationManager Delegate
+
+extension MapViewController: CLLocationManagerDelegate {
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		guard let location = locations.last else { return }
-		let center = location.coordinate
-		let region = MKCoordinateRegion(center: center, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-		mapView.setRegion(region, animated: true)
+		centerMapViewOn(location: location.coordinate)
+
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -46,20 +53,24 @@ extension ViewController: CLLocationManagerDelegate {
 	
 }
 
-extension ViewController {
-	
-	private func setupLocationManager() {
-		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-	}
+// MARK:- Helper Functions
+
+extension MapViewController {
 	
 	private func checkLocationServices() {
+		// Check whether location services are enabled or not
 		if CLLocationManager.locationServicesEnabled() {
 			setupLocationManager()
+			// Check whether location services are enabled for the app or not
 			checkLocationAuthorization()
 		} else {
 			#warning("TODO: Alert the user")
 		}
+	}
+	
+	private func setupLocationManager() {
+		locationManager.delegate = self
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 	}
 	
 	private func checkLocationAuthorization() {
@@ -68,8 +79,10 @@ extension ViewController {
 			locationManager.requestWhenInUseAuthorization()
 		case .authorizedWhenInUse:
 			print("Authorized When in Use")
+			// Show user's location on map
 			mapView.showsUserLocation = true
-			centerViewonUserLocation()
+			centerMapViewOn(location: locationManager.location?.coordinate)
+			// Update user's location on map
 			locationManager.startUpdatingLocation()
 		case .authorizedAlways:
 			break
@@ -82,9 +95,11 @@ extension ViewController {
 		}
 	}
 	
-	private func centerViewonUserLocation() {
-		if let location = locationManager.location?.coordinate {
-			let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+	private func centerMapViewOn(location: CLLocationCoordinate2D?) {
+		if let location = location {
+			let region = MKCoordinateRegion(center: location,
+											latitudinalMeters: regionInMeters,
+											longitudinalMeters: regionInMeters)
 			mapView.setRegion(region, animated: true)
 		}
 	}
