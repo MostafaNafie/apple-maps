@@ -33,6 +33,13 @@ extension ViewController: MKMapViewDelegate {
 
 extension ViewController: CLLocationManagerDelegate {
 	
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		guard let location = locations.last else { return }
+		let center = location.coordinate
+		let region = MKCoordinateRegion(center: center, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+		mapView.setRegion(region, animated: true)
+	}
+	
 }
 
 extension ViewController {
@@ -55,12 +62,11 @@ extension ViewController {
 		switch CLLocationManager.authorizationStatus() {
 		case .notDetermined:
 			locationManager.requestWhenInUseAuthorization()
-			mapView.showsUserLocation = true
-			centerViewonUserLocation()
 		case .authorizedWhenInUse:
 			print("Authorized When in Use")
 			mapView.showsUserLocation = true
 			centerViewonUserLocation()
+			locationManager.startUpdatingLocation()
 		case .authorizedAlways:
 			break
 		case .restricted:
