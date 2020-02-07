@@ -28,6 +28,7 @@ class AddressViewController: UIViewController {
 		super.viewDidLoad()
 		
 		checkLocationServices()
+		setMapViewGestureRecognizer()
 	}
 	
 }
@@ -48,6 +49,33 @@ extension AddressViewController: MKMapViewDelegate {
 	
 	func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
 		getAddress()
+	}
+	
+}
+
+// MARK:- GestureRecognizer Delegate
+
+extension AddressViewController: UIGestureRecognizerDelegate {
+	
+	func setMapViewGestureRecognizer(){
+		let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureReconizer:)))
+		gestureRecognizer.minimumPressDuration = 0.5
+		gestureRecognizer.delaysTouchesBegan = true
+		gestureRecognizer.delegate = self
+		self.mapView.addGestureRecognizer(gestureRecognizer)
+	}
+	
+	@objc func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+		if gestureReconizer.state != UIGestureRecognizer.State.ended {
+			let touchLocation = gestureReconizer.location(in: mapView)
+			let locationCoordinate = mapView.convert(touchLocation,toCoordinateFrom: mapView)
+			centerMapViewOn(location: locationCoordinate)
+			print("Tapped at lat: \(locationCoordinate.latitude) long: \(locationCoordinate.longitude)")
+			return
+		}
+		if gestureReconizer.state != UIGestureRecognizer.State.began {
+			return
+		}
 	}
 	
 }
