@@ -13,9 +13,7 @@ class MapViewController: UIViewController {
 
 	// MARK:- Outlets and Properties
 	
-	@IBOutlet weak var mapView: MKMapView! {
-		didSet { mapView.delegate = self }
-	}
+	@IBOutlet weak var mapView: MKMapView!
 	
 	private let locationManager = CLLocationManager()
 	private let regionInMeters = Double(10000)
@@ -28,13 +26,6 @@ class MapViewController: UIViewController {
 		checkLocationServices()
 	}
 
-}
-
-// MARK:- MapView Delegate
-
-extension MapViewController: MKMapViewDelegate {
-	
-	
 }
 
 // MARK:- LocationManager Delegate
@@ -78,12 +69,7 @@ extension MapViewController {
 		case .notDetermined:
 			locationManager.requestWhenInUseAuthorization()
 		case .authorizedWhenInUse:
-			print("Authorized When in Use")
-			// Show user's location on map
-			mapView.showsUserLocation = true
-			centerMapViewOn(location: locationManager.location?.coordinate)
-			// Update user's location on map
-			locationManager.startUpdatingLocation()
+			startTrackingUserLocation()
 		case .denied:
 			#warning("TODO: Alert the user")
 			break
@@ -94,6 +80,14 @@ extension MapViewController {
 		@unknown default:
 			break
 		}
+	}
+	
+	private func startTrackingUserLocation() {
+		// Show user's location on map
+		mapView.showsUserLocation = true
+		centerMapViewOn(location: locationManager.location?.coordinate)
+		// Update user's location on map
+		locationManager.startUpdatingLocation()
 	}
 	
 	private func centerMapViewOn(location: CLLocationCoordinate2D?) {

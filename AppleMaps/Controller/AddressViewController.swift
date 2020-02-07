@@ -47,34 +47,7 @@ extension AddressViewController: CLLocationManagerDelegate {
 extension AddressViewController: MKMapViewDelegate {
 	
 	func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-		let center = getCenterLocation(of: mapView)
-		let geoCoder = CLGeocoder()
-		guard previousLocation != nil else { return }
-		
-		// Call reverGocodeLocation only if the difference between the previous location and current location is greater than 50 meters
-		guard center.distance(from: previousLocation!) > 50 else { return }
-		previousLocation = center
-		
-		geoCoder.reverseGeocodeLocation(center) { [weak self] (placemarks, error) in
-			guard let self = self else { return }
-			
-			if let _ = error {
-				#warning("Alert the user")
-				return
-			}
-			
-			guard let placemark = placemarks?.first else {
-				#warning("Alert the user")
-				return
-			}
-			
-			let streetNumber = placemark.subThoroughfare ?? ""
-			let streetName = placemark.thoroughfare ?? ""
-			
-			DispatchQueue.main.async {
-				self.addressLabel.text = "\(streetNumber) \(streetName)"
-			}
-		}
+		getAddress()
 	}
 	
 }
@@ -104,12 +77,10 @@ extension AddressViewController {
 		case .notDetermined:
 			locationManager.requestWhenInUseAuthorization()
 		case .authorizedWhenInUse:
-			print("Authorized When in Use")
 			// Show user's location on map
-//			mapView.showsUserLocation = true
+			mapView.showsUserLocation = true
 			centerMapViewOn(location: locationManager.location?.coordinate)
-//			locationManager.startUpdatingLocation()
-			// Get the initailLocation
+			// Get the initailn Location
 			previousLocation = getCenterLocation(of: mapView)
 		case .denied:
 			#warning("TODO: Alert the user")
@@ -137,6 +108,37 @@ extension AddressViewController {
 		let longitude = mapView.centerCoordinate.longitude
 		
 		return CLLocation(latitude: latitude, longitude: longitude)
+	}
+	
+	private func getAddress() {
+		let center = getCenterLocation(of: mapView)
+		let geoCoder = CLGeocoder()
+		guard previousLocation != nil else { return }
+		
+		// Call reverGocodeLocation only if the difference between the previous location and current location is greater than 50 meters
+		guard center.distance(from: previousLocation!) > 50 else { return }
+		previousLocation = center
+		
+		geoCoder.reverseGeocodeLocation(center) { [weak self] (placemarks, error) in
+			guard let self = self else { return }
+			
+			if let _ = error {
+				#warning("Alert the user")
+				return
+			}
+			
+			guard let placemark = placemarks?.first else {
+				#warning("Alert the user")
+				return
+			}
+			
+			let streetNumber = placemark.subThoroughfare ?? ""
+			let streetName = placemark.thoroughfare ?? ""
+			
+			DispatchQueue.main.async {
+				self.addressLabel.text = "\(streetNumber) \(streetName)"
+			}
+		}
 	}
 	
 }
