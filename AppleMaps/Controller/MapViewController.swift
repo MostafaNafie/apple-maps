@@ -58,7 +58,7 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController {
 	
 	private func checkLocationServices() {
-		// Check whether location services are enabled or not
+		// Check whether location services are enabled for the device or not
 		if CLLocationManager.locationServicesEnabled() {
 			setupLocationManager()
 			// Check whether location services are enabled for the app or not
