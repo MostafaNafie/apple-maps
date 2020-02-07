@@ -15,11 +15,12 @@ class ViewController: UIViewController {
 		didSet { mapView.delegate = self }
 	}
 	
-	let locationManager = CLLocationManager()
+	private let locationManager = CLLocationManager()
+	private let regionInMeters = Double(10000)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		mapView.delegate = self
 		checkLocationServices()
 	}
 
@@ -54,8 +55,12 @@ extension ViewController {
 		switch CLLocationManager.authorizationStatus() {
 		case .notDetermined:
 			locationManager.requestWhenInUseAuthorization()
+			mapView.showsUserLocation = true
+			centerViewonUserLocation()
 		case .authorizedWhenInUse:
-			break
+			print("Authorized When in Use")
+			mapView.showsUserLocation = true
+			centerViewonUserLocation()
 		case .authorizedAlways:
 			break
 		case .restricted:
@@ -66,5 +71,13 @@ extension ViewController {
 			break
 		}
 	}
+	
+	private func centerViewonUserLocation() {
+		if let location = locationManager.location?.coordinate {
+			let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+			mapView.setRegion(region, animated: true)
+		}
+	}
+	
 }
 
