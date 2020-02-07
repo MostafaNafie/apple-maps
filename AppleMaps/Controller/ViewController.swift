@@ -40,6 +40,10 @@ extension ViewController: CLLocationManagerDelegate {
 		mapView.setRegion(region, animated: true)
 	}
 	
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		checkLocationAuthorization()
+	}
+	
 }
 
 extension ViewController {
