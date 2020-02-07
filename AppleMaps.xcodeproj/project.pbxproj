@@ -58,13 +58,37 @@
 			children = (
 				45B14D2F23EDDC8400F37729 /* AppDelegate.swift */,
 				45B14D3123EDDC8400F37729 /* SceneDelegate.swift */,
-				45B14D3323EDDC8400F37729 /* ViewController.swift */,
-				45B14D3523EDDC8400F37729 /* Main.storyboard */,
+				45B14D4323EDDCE200F37729 /* Model */,
+				45B14D4423EDDCEC00F37729 /* View */,
+				45B14D4523EDDCF300F37729 /* Controller */,
 				45B14D3823EDDC8600F37729 /* Assets.xcassets */,
-				45B14D3A23EDDC8600F37729 /* LaunchScreen.storyboard */,
 				45B14D3D23EDDC8600F37729 /* Info.plist */,
 			);
 			path = AppleMaps;
+			sourceTree = "<group>";
+		};
+		45B14D4323EDDCE200F37729 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		45B14D4423EDDCEC00F37729 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				45B14D3A23EDDC8600F37729 /* LaunchScreen.storyboard */,
+				45B14D3523EDDC8400F37729 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		45B14D4523EDDCF300F37729 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				45B14D3323EDDC8400F37729 /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
