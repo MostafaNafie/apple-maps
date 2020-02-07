@@ -84,11 +84,12 @@ extension MapViewController {
 			centerMapViewOn(location: locationManager.location?.coordinate)
 			// Update user's location on map
 			locationManager.startUpdatingLocation()
+		case .denied:
+			#warning("TODO: Alert the user")
+			break
 		case .authorizedAlways:
 			break
 		case .restricted:
-			break
-		case .denied:
 			break
 		@unknown default:
 			break
