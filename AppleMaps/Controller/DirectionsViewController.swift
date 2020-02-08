@@ -18,6 +18,10 @@ class DirectionsViewController: UIViewController {
 	}
 	@IBOutlet weak var addressLabel: UILabel!
 	
+	@IBOutlet weak var goButton: UIButton! {
+		didSet { goButton.layer.cornerRadius = goButton.layer.frame.height / 2 }
+	}
+	
 	private let locationManager = CLLocationManager()
 	private let regionInMeters: Double = 10000
 	private var previousLocation: CLLocation?

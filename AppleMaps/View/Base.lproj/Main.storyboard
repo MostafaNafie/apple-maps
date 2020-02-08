@@ -178,12 +178,13 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9N-Ut-vwh">
                                 <rect key="frame" x="349" y="776" width="45" height="45"/>
-                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="Nyt-9o-ZK6"/>
                                     <constraint firstAttribute="width" secondItem="E9N-Ut-vwh" secondAttribute="height" id="faS-ba-Yrs"/>
                                 </constraints>
-                                <state key="normal" title="Go">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="GO">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -210,6 +211,7 @@
                     <navigationItem key="navigationItem" title="Show Directions" id="qvc-TR-UGm"/>
                     <connections>
                         <outlet property="addressLabel" destination="Ntg-vS-WY3" id="O3B-4k-YUh"/>
+                        <outlet property="goButton" destination="E9N-Ut-vwh" id="N0b-VY-5lQ"/>
                         <outlet property="mapView" destination="Ekj-oW-mDG" id="QJX-VF-ywm"/>
                     </connections>
                 </viewController>
