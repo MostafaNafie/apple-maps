@@ -31,6 +31,9 @@ class DirectionsViewController: UIViewController {
 		setMapViewGestureRecognizer()
 	}
 	
+	@IBAction func goButtonTapped(_ sender: Any) {
+		getDirections()
+	}
 }
 
 // MARK:- LocationManager Delegate
@@ -147,9 +150,7 @@ extension DirectionsViewController {
 		guard center.distance(from: previousLocation!) > 50 else { return }
 		previousLocation = center
 		
-		geoCoder.reverseGeocodeLocation(center) { [weak self] (placemarks, error) in
-			guard let self = self else { return }
-			
+		geoCoder.reverseGeocodeLocation(center) { [unowned self] (placemarks, error) in
 			if let _ = error {
 				#warning("Alert the user")
 				return
@@ -167,6 +168,38 @@ extension DirectionsViewController {
 				self.addressLabel.text = "\(streetNumber) \(streetName)"
 			}
 		}
+	}
+	
+	private func getDirections() {
+		guard let location = locationManager.location?.coordinate else {
+			return
+		}
+		
+		let request = createDirectionsRequest(from: location)
+		let directions = MKDirections(request: request)
+		
+		directions.calculate { [unowned self] (response, error) in
+			guard let response = response else { return }
+			
+			for route in response.routes {
+				self.mapView.addOverlay(route.polyline)
+				self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+			}
+		}
+	}
+	
+	private func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
+		let startingLocation = MKPlacemark(coordinate: coordinate)
+		let destinationCoordinates = getCenterLocation(of: mapView).coordinate
+		let destinationLocation = MKPlacemark(coordinate: destinationCoordinates)
+		
+		let request = MKDirections.Request()
+		request.source = MKMapItem(placemark: startingLocation)
+		request.destination = MKMapItem(placemark: destinationLocation)
+		request.transportType = .automobile
+		request.requestsAlternateRoutes = true
+		
+		return request
 	}
 	
 }

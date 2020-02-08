@@ -176,15 +176,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9N-Ut-vwh">
+                                <rect key="frame" x="349" y="776" width="45" height="45"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="Nyt-9o-ZK6"/>
+                                    <constraint firstAttribute="width" secondItem="E9N-Ut-vwh" secondAttribute="height" id="faS-ba-Yrs"/>
+                                </constraints>
+                                <state key="normal" title="Go">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="goButtonTapped:" destination="I3u-6z-mBh" eventType="touchUpInside" id="dIW-Qw-5oq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Ekj-oW-mDG" firstAttribute="leading" secondItem="M1q-Og-D3Y" secondAttribute="leading" id="3gd-6h-UkA"/>
+                            <constraint firstItem="Ntg-vS-WY3" firstAttribute="top" secondItem="E9N-Ut-vwh" secondAttribute="bottom" constant="20" id="6ZD-qX-EQb"/>
                             <constraint firstItem="Ntg-vS-WY3" firstAttribute="leading" secondItem="7OF-gP-q8D" secondAttribute="leading" id="ESz-KS-sbF"/>
                             <constraint firstItem="7OF-gP-q8D" firstAttribute="trailing" secondItem="Ntg-vS-WY3" secondAttribute="trailing" id="W9M-d4-Hy1"/>
                             <constraint firstItem="TeN-ee-aj1" firstAttribute="centerY" secondItem="Ekj-oW-mDG" secondAttribute="centerY" constant="-20" id="bt8-hZ-Afd"/>
                             <constraint firstItem="Ntg-vS-WY3" firstAttribute="top" secondItem="Ekj-oW-mDG" secondAttribute="bottom" id="dZn-Hj-uJp"/>
                             <constraint firstItem="Ntg-vS-WY3" firstAttribute="bottom" secondItem="7OF-gP-q8D" secondAttribute="bottom" id="eDq-eh-fXc"/>
+                            <constraint firstItem="7OF-gP-q8D" firstAttribute="trailing" secondItem="E9N-Ut-vwh" secondAttribute="trailing" constant="20" id="eGw-Kd-ax7"/>
                             <constraint firstItem="Ekj-oW-mDG" firstAttribute="top" secondItem="M1q-Og-D3Y" secondAttribute="topMargin" id="fQX-bH-6kf"/>
                             <constraint firstItem="TeN-ee-aj1" firstAttribute="centerX" secondItem="Ekj-oW-mDG" secondAttribute="centerX" id="pFa-MZ-hzI"/>
                             <constraint firstAttribute="trailing" secondItem="Ekj-oW-mDG" secondAttribute="trailing" id="vdd-tS-eTY"/>
