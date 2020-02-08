@@ -18,21 +18,21 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eEg-ez-mjb">
                                 <rect key="frame" x="128.5" y="403" width="157" height="90"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2h-VH-xdr">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2h-VH-xdr">
                                         <rect key="frame" x="0.0" y="0.0" width="157" height="30"/>
                                         <state key="normal" title="Track Current Location"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" id="OWs-D0-ObK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCM-W0-9iD">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCM-W0-9iD">
                                         <rect key="frame" x="0.0" y="30" width="157" height="30"/>
                                         <state key="normal" title="Get Address on Map"/>
                                         <connections>
                                             <segue destination="v7Z-UE-sZT" kind="show" id="UBm-aV-9g0"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVk-cF-sL8">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVk-cF-sL8">
                                         <rect key="frame" x="0.0" y="60" width="157" height="30"/>
                                         <state key="normal" title="Show Directions"/>
                                         <connections>
@@ -50,6 +50,11 @@
                         <viewLayoutGuide key="safeArea" id="nl1-G9-0I3"/>
                     </view>
                     <navigationItem key="navigationItem" title="Apple Maps Example" id="wGV-dR-WEx"/>
+                    <connections>
+                        <outletCollection property="mainButtons" destination="Z2h-VH-xdr" collectionClass="NSMutableArray" id="GHq-uo-YKT"/>
+                        <outletCollection property="mainButtons" destination="DCM-W0-9iD" collectionClass="NSMutableArray" id="6Qi-br-nce"/>
+                        <outletCollection property="mainButtons" destination="ZVk-cF-sL8" collectionClass="NSMutableArray" id="XbV-CJ-tel"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDe-zY-SNO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,6 +13,8 @@ class MainViewController: UIViewController {
 	
 	// MARK:- Outlets and Properties
 
+	@IBOutlet var mainButtons: [UIButton]!
+	
 	private let locationManager = CLLocationManager()
 
 	// MARK:- View Lifecycle
@@ -61,6 +63,7 @@ extension MainViewController {
 			locationManager.requestWhenInUseAuthorization()
 		case .authorizedWhenInUse:
 			// Enable Buttons
+			mainButtons.forEach { $0.isEnabled = true }
 			break
 		case .denied:
 			#warning("TODO: Alert the user")
