@@ -21,6 +21,7 @@ class DirectionsViewController: UIViewController {
 	private let locationManager = CLLocationManager()
 	private let regionInMeters: Double = 10000
 	private var previousLocation: CLLocation?
+	private var previousDirections: MKDirections?
 	
 	// MARK:- View Lifecycle
 	
@@ -182,8 +183,10 @@ extension DirectionsViewController {
 			return
 		}
 		
+		resetMapView()
 		let request = createDirectionsRequest(from: location)
 		let directions = MKDirections(request: request)
+		previousDirections = directions
 		
 		directions.calculate { [unowned self] (response, error) in
 			guard let response = response else { return }
@@ -207,6 +210,13 @@ extension DirectionsViewController {
 		request.requestsAlternateRoutes = true
 		
 		return request
+	}
+	
+	private func resetMapView() {
+		// Remove the previously displayed directions on the map
+		mapView.removeOverlays(mapView.overlays)
+		// Cancel previous request if any
+		previousDirections?.cancel()
 	}
 	
 }
