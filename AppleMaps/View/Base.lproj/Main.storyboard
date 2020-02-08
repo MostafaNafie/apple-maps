@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eEg-ez-mjb">
-                                <rect key="frame" x="128.5" y="418" width="157" height="60"/>
+                                <rect key="frame" x="128.5" y="403" width="157" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2h-VH-xdr">
                                         <rect key="frame" x="0.0" y="0.0" width="157" height="30"/>
@@ -30,6 +30,13 @@
                                         <state key="normal" title="Get Address on Map"/>
                                         <connections>
                                             <segue destination="v7Z-UE-sZT" kind="show" id="UBm-aV-9g0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVk-cF-sL8">
+                                        <rect key="frame" x="0.0" y="60" width="157" height="30"/>
+                                        <state key="normal" title="Show Directions"/>
+                                        <connections>
+                                            <segue destination="I3u-6z-mBh" kind="show" id="skN-tH-ZDB"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -76,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="8.7053571428571423"/>
+            <point key="canvasLocation" x="58" y="-663"/>
         </scene>
         <!--Get Address on Map-->
         <scene sceneID="8kP-zP-pG2">
@@ -126,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ClM-yb-0ih" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="666.96428571428567"/>
+            <point key="canvasLocation" x="58" y="-4"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="A4V-fj-VVn">
@@ -143,6 +150,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H9t-ln-wOE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1470" y="-4"/>
+        </scene>
+        <!--Show Directions-->
+        <scene sceneID="X3N-do-lCn">
+            <objects>
+                <viewController storyboardIdentifier="DirectionsViewController" id="I3u-6z-mBh" customClass="DirectionsViewController" customModule="AppleMaps" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M1q-Og-D3Y">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ekj-oW-mDG">
+                                <rect key="frame" x="0.0" y="88" width="414" height="753"/>
+                            </mapView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pin" translatesAutoresizingMaskIntoConstraints="NO" id="TeN-ee-aj1">
+                                <rect key="frame" x="187" y="424.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="54K-fR-P2m"/>
+                                    <constraint firstAttribute="width" secondItem="TeN-ee-aj1" secondAttribute="height" id="UgE-ac-t3h"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ntg-vS-WY3">
+                                <rect key="frame" x="0.0" y="841" width="414" height="21"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Ekj-oW-mDG" firstAttribute="leading" secondItem="M1q-Og-D3Y" secondAttribute="leading" id="3gd-6h-UkA"/>
+                            <constraint firstItem="Ntg-vS-WY3" firstAttribute="leading" secondItem="7OF-gP-q8D" secondAttribute="leading" id="ESz-KS-sbF"/>
+                            <constraint firstItem="7OF-gP-q8D" firstAttribute="trailing" secondItem="Ntg-vS-WY3" secondAttribute="trailing" id="W9M-d4-Hy1"/>
+                            <constraint firstItem="TeN-ee-aj1" firstAttribute="centerY" secondItem="Ekj-oW-mDG" secondAttribute="centerY" constant="-20" id="bt8-hZ-Afd"/>
+                            <constraint firstItem="Ntg-vS-WY3" firstAttribute="top" secondItem="Ekj-oW-mDG" secondAttribute="bottom" id="dZn-Hj-uJp"/>
+                            <constraint firstItem="Ntg-vS-WY3" firstAttribute="bottom" secondItem="7OF-gP-q8D" secondAttribute="bottom" id="eDq-eh-fXc"/>
+                            <constraint firstItem="Ekj-oW-mDG" firstAttribute="top" secondItem="M1q-Og-D3Y" secondAttribute="topMargin" id="fQX-bH-6kf"/>
+                            <constraint firstItem="TeN-ee-aj1" firstAttribute="centerX" secondItem="Ekj-oW-mDG" secondAttribute="centerX" id="pFa-MZ-hzI"/>
+                            <constraint firstAttribute="trailing" secondItem="Ekj-oW-mDG" secondAttribute="trailing" id="vdd-tS-eTY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7OF-gP-q8D"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Show Directions" id="qvc-TR-UGm"/>
+                    <connections>
+                        <outlet property="addressLabel" destination="Ntg-vS-WY3" id="O3B-4k-YUh"/>
+                        <outlet property="mapView" destination="Ekj-oW-mDG" id="QJX-VF-ywm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nlx-0d-F1a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="58" y="670"/>
         </scene>
     </scenes>
     <resources>
