@@ -23,7 +23,7 @@ class MapViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		checkLocationServices()
+		setupLocationManager()
 	}
 
 }
@@ -35,11 +35,6 @@ extension MapViewController: CLLocationManagerDelegate {
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		guard let location = locations.last else { return }
 		centerMapViewOn(location: location.coordinate)
-
-	}
-	
-	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-		checkLocationAuthorization()
 	}
 	
 }
@@ -48,38 +43,10 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController {
 	
-	private func checkLocationServices() {
-		// Check whether location services are enabled for the device or not
-		if CLLocationManager.locationServicesEnabled() {
-			setupLocationManager()
-			// Check whether location services are enabled for the app or not
-			checkLocationAuthorization()
-		} else {
-			#warning("TODO: Alert the user")
-		}
-	}
-	
 	private func setupLocationManager() {
 		locationManager.delegate = self
 		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-	}
-	
-	private func checkLocationAuthorization() {
-		switch CLLocationManager.authorizationStatus() {
-		case .notDetermined:
-			locationManager.requestWhenInUseAuthorization()
-		case .authorizedWhenInUse:
-			startTrackingUserLocation()
-		case .denied:
-			#warning("TODO: Alert the user")
-			break
-		case .authorizedAlways:
-			break
-		case .restricted:
-			break
-		@unknown default:
-			break
-		}
+		startTrackingUserLocation()
 	}
 	
 	private func startTrackingUserLocation() {
