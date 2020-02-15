@@ -53,7 +53,7 @@ extension MainViewController {
 			// Check whether location services are enabled for the app or not
 			checkLocationAuthorization()
 		} else {
-			#warning("TODO: Alert the user")
+			// TODO: Alert the user
 		}
 	}
 	
@@ -66,7 +66,7 @@ extension MainViewController {
 			mainButtons.forEach { $0.isEnabled = true }
 			break
 		case .denied:
-			#warning("TODO: Alert the user")
+			// TODO: Alert the user
 			break
 		case .authorizedAlways:
 			break
